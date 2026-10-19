@@ -1,0 +1,3 @@
+zone_id,date,ndvi_mean,ndvi_clear_coverage,year,synthetic
+DEMO_WEST,2023-07-02,0.20000000298024265,1.0,2023,True
+DEMO_EAST,2023-07-02,0.5,1.0,2023,True

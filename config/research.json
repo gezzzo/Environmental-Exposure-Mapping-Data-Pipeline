@@ -1,0 +1,16 @@
+{
+  "zones": "../data/bremen_ortsteile.gpkg",
+  "zone_id_column": "zone_id",
+  "landuse": "../data/urban_atlas.gpkg",
+  "class_column": "code_2018",
+  "green_codes": ["14100", "31000"],
+  "landuse_reference_year": 2018,
+  "climate_manifest": "../data/era5_daily/climate.csv",
+  "climate_source": "ERA5 t2m; UTC; hourly sampled extrema",
+  "ndvi_manifest": "../data/sentinel/ndvi.csv",
+  "start": "2023-06-01",
+  "end": "2023-08-31",
+  "minimum_coverage": 0.9,
+  "output": "../outputs/research",
+  "synthetic": false
+}

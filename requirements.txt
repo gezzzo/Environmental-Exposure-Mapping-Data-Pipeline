@@ -1,0 +1,8 @@
+geopandas>=1.0,<2
+rasterio>=1.4,<2
+numpy>=2,<3
+pandas>=2.2,<4
+pyarrow>=18
+pytest>=8,<10
+xarray>=2024.7
+netCDF4>=1.7
