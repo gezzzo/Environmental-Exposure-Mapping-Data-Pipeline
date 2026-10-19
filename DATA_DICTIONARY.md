@@ -1,31 +1,31 @@
-# قاموس البيانات
+# Data Dictionary
 
-CSV بترميز UTF-8؛ الخانة الفارغة = مفقود، وليست صفرًا. معرفات المناطق نصية. التواريخ ISO. Parquet يحافظ على أنواع الأعمدة.
+CSV files use UTF-8 encoding. An empty field denotes a missing value, not zero. Zone identifiers are strings; dates use ISO format. Parquet exports preserve column types.
 
-| الحقل | التعريف / الوحدة |
+| Field | Definition / unit |
 |---|---|
-| zone_id | معرف المنطقة لربط البيانات؛ حدود الإدخال تحدد المستوى الإداري |
-| date | يوم UTC، YYYY-MM-DD |
-| year | السنة، مع تلخيص الجزء المطلوب منها فقط |
-| tmean_c / tmax_c / tmin_c | متوسط المنطقة لحرارة الخلية اليومية، °C؛ ERA5: متوسط/أقصى/أدنى العينات الساعية |
-| *_spatial_coverage | مساحة الحرارة الصالحة / مساحة المنطقة، 0–1 |
-| zone_area_m2 | مساحة كامل المنطقة، m² |
-| green_area_m2 | مساحة اتحاد الفئات الخضراء المرصودة داخل المنطقة، m² |
-| green_fraction | مساحة الخضرة / كامل مساحة المنطقة، 0–1؛ مفقودة عند ضعف تغطية خريطة الأرض |
-| land_coverage / land_coverage_ok | تغطية استخدام الأرض، 0–1 / اجتياز حد التغطية |
-| expected_days | عدد الأيام بين start وend داخل السنة، شامل الطرفين |
-| tmean_valid_days / tmax_valid_days / tmin_valid_days | عدد الأيام ذات المتوسط المكاني المقبول لكل متغير |
-| *_temporal_coverage | عدد الأيام الصالحة / expected_days، 0–1 |
-| tmean_mean_c / tmax_mean_c / tmin_mean_c | متوسط القيم اليومية المقبولة، °C؛ محجوب إن نقصت التغطية الزمنية |
-| hot_days_observed | عدد الأيام الصالحة التي متوسط Tmax المكاني فيها ≥30°C؛ ليس متوسط عدد التجاوزات لكل خلية |
-| warm_minimum_days_observed | عدد الأيام الصالحة التي متوسط Tmin المكاني فيها ≥20°C |
-| hot_days_fraction_valid / warm_minimum_days_fraction_valid | عدد أيام التجاوز / عدد الأيام الصالحة للمتغير؛ محجوب إن نقصت التغطية |
-| ndvi_mean | NDVI موزون بمساحة البكسلات الصافية داخل المنطقة لكل مشهد، −1 إلى 1 |
-| ndvi_clear_coverage | مساحة NDVI الصالح / كامل مساحة المنطقة، 0–1 |
-| ndvi_scene_mean | متوسط ndvi_mean للمشاهد المقبولة ضمن الفترة/السنة |
-| ndvi_valid_scenes / ndvi_scenes_available | عدد المشاهد المقبولة / عدد المشاهد المتاحة ضمن الفترة |
-| synthetic | true للبيانات الاصطناعية، false للبحث الحقيقي |
-| landuse_reference_year | سنة خريطة استخدام الأرض، ثابتة في التشغيل |
-| climate_source | وصف المصدر وأساس التوقيت وطريقة استخراج الحرارة |
+| `zone_id` | Stable zone identifier for data linkage; input boundaries define the administrative level |
+| `date` | UTC calendar day, YYYY-MM-DD |
+| `year` | Calendar year; summaries cover only the requested dates within that year |
+| `tmean_c` / `tmax_c` / `tmin_c` | Area-weighted zone mean of daily cell temperatures, °C; for ERA5, daily cell values are the mean, maximum, or minimum of hourly samples |
+| `*_spatial_coverage` | Valid temperature raster area divided by total zone area, 0–1 |
+| `zone_area_m2` | Total zone area, m² |
+| `green_area_m2` | Observed area of the union of selected green-space classes within the zone, m² |
+| `green_fraction` | Green-space area divided by total zone area, 0–1; missing when land-use coverage is insufficient |
+| `land_coverage` / `land_coverage_ok` | Proportion of zone area covered by the land-use map, 0–1 / whether it meets the coverage threshold |
+| `expected_days` | Number of requested days within the year, including both start and end dates |
+| `tmean_valid_days` / `tmax_valid_days` / `tmin_valid_days` | Number of days with an accepted spatial mean for each temperature variable |
+| `*_temporal_coverage` | Valid days divided by expected days, 0–1 |
+| `tmean_mean_c` / `tmax_mean_c` / `tmin_mean_c` | Mean of accepted daily zone values, °C; missing when temporal coverage is insufficient |
+| `hot_days_observed` | Number of valid days with zone-average Tmax ≥30°C; not the spatial mean of cell-level exceedance counts |
+| `warm_minimum_days_observed` | Number of valid days with zone-average Tmin ≥20°C |
+| `hot_days_fraction_valid` / `warm_minimum_days_fraction_valid` | Observed exceedance days divided by valid days for the relevant variable; missing when temporal coverage is insufficient |
+| `ndvi_mean` | Area-weighted mean NDVI of accepted clear pixels within the zone for an image date, −1 to 1 |
+| `ndvi_clear_coverage` | Valid NDVI area divided by total zone area, 0–1 |
+| `ndvi_scene_mean` | Equal-weight mean of accepted scene-level zone NDVI means within the requested period and year |
+| `ndvi_valid_scenes` / `ndvi_scenes_available` | Number of accepted scenes / number of available scenes within the requested period |
+| `synthetic` | `true` for synthetic demonstration data; `false` for research inputs |
+| `landuse_reference_year` | Reference year of the land-use map, fixed for a run |
+| `climate_source` | Description of the climate source, time basis, and temperature derivation |
 
-ملاحظة: تطبيق العتبة على متوسط Tmax للمنطقة يختلف عن حساب تجاوز كل خلية ثم أخذ متوسط النسبة المكانية. البرنامج ينفذ التعريف الأول. لا تعرض الحقول `*_observed` كأعداد سنوية كاملة عندما تقل التغطية عن 100%.
+Applying a threshold to zone-average Tmax differs from calculating exceedances in each cell and then averaging spatially. This pipeline implements the former. Do not report `*_observed` fields as complete annual counts when coverage is below 100%.

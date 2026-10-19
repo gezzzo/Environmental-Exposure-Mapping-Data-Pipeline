@@ -8,7 +8,7 @@ The project focuses on a practical research problem: **how can heterogeneous env
 
 **Status:** working research prototype with an end-to-end synthetic demonstration. Real-data analysis for Bremen and external validation have not yet been completed. The example results below demonstrate software behaviour, not environmental conditions in Bremen.
 
-[Quick start](#quick-start) · [Methods](#methods) · [Real-data workflow](#real-data-workflow) · [Limitations](#limitations-and-research-interpretation) 
+[Quick start](#quick-start) · [Methods](#methods) · [Real-data workflow](#real-data-workflow) · [Limitations](#limitations-and-research-interpretation)
 
 ## Research purpose
 
@@ -226,7 +226,7 @@ The filename `exposure_annual` does **not** imply a complete calendar year: chec
 
 Tables can be joined to area-level health records using `(zone_id, date)` or `(zone_id, year)`, after matching temporal definitions and study windows. No health records are included. All spatial summaries are area-weighted, not population-weighted.
 
-The [detailed variable dictionary](DATA_DICTIONARY.md) is currently provided in Arabic. For daily health outcomes dated in German local time, adapt the current UTC aggregation before linkage. Any lag variables should be constructed within each zone on a complete daily index, preserving missing values.
+The [data dictionary](DATA_DICTIONARY.md) defines the exported variables and units. For daily health outcomes dated in German local time, adapt the current UTC aggregation before linkage. Any lag variables should be constructed within each zone on a complete daily index, preserving missing values.
 
 ## Validation and reproducibility
 
@@ -278,8 +278,7 @@ config/
 examples/                Synthetic CSV result snapshots
 tests/
   test_pipeline.py       Unit and end-to-end tests
-DATA_DICTIONARY.md        Detailed field definitions in Arabic
-README.ar.md             Arabic operational guide
+DATA_DICTIONARY.md        Field definitions, units, and interpretation
 requirements.txt         Dependency ranges
 requirements-lock.txt    Tested environment snapshot
 ```
