@@ -8,7 +8,7 @@ The project focuses on a practical research problem: **how can heterogeneous env
 
 **Status:** working research prototype with an end-to-end synthetic demonstration. Real-data analysis for Bremen and external validation have not yet been completed. The example results below demonstrate software behaviour, not environmental conditions in Bremen.
 
-[Quick start](#quick-start) · [Methods](#methods) · [Real-data workflow](#real-data-workflow) · [Limitations](#limitations-and-research-interpretation) · [الدليل بالعربية](README.ar.md)
+[Quick start](#quick-start) · [Methods](#methods) · [Real-data workflow](#real-data-workflow) · [Limitations](#limitations-and-research-interpretation) 
 
 ## Research purpose
 
